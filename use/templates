@@ -1,0 +1,358 @@
+
+#include <iostream>
+#include <vector>
+#include<string>
+#include <cstring>
+
+
+template<typename T>
+void printElement(T a){
+    
+    std::cout << a << " ";
+    
+}
+
+template<typename T>
+void mySwap(T a, T b){
+    
+    T c = a;
+    a = b;
+    b = c;
+    std::cout << a << " " << b << " "; 
+}
+
+
+template<typename T>
+void sumArray(T* arr, int size){
+    T sum = T();
+   for (int i = 0; i < size; i++) {
+       sum += arr[i];
+   }
+   
+   std::cout << sum << " ";
+}
+
+
+template<typename T>
+void linearSearch(T* arr, T e, int size){
+    
+   for (int i = 0; i < size; i++) {
+       if(arr[i] == e){
+           std::cout << "thats e number " << i << "\n";
+           return;
+       }
+   }
+   
+   std::cout << "ehhhh" << "\n";
+}
+
+
+// classes
+
+template<typename T1 , typename T2>
+class pair{
+    
+    T1 first;
+    T2 second;
+    
+    public:
+    
+    pair(T1 f,T2 s){
+        
+        first = f;
+        second = s;
+        
+    }
+    
+    void print(){
+        std::cout << first << " " << second;
+    }
+    
+};
+
+
+template< typename T, int N>
+class FixedArray{
+    
+    T arr[N];
+    
+    
+public:    
+  void set(int index, T value) {
+      arr[index] = value;
+      
+  } 
+  
+  T get(int index){
+      
+      return arr[index];
+      
+  }
+  int size(){
+      return N;
+  }
+    
+};
+
+
+template< typename T, int N, int M>
+class Matrix{
+    
+  T arr[N][N];
+  
+public:
+
+    void set(int row, int col, T value) {
+      arr[row][col] = value;
+      
+   } 
+  
+   T get(int row, int col){
+      
+      return arr[row][col];
+      
+   }
+  
+   void print(){
+      for (int i = 0; i < N; i++) {
+          for (int j = 0; j < M; j++) {
+              std::cout << arr[i][j] << " ";
+          }
+          std::cout << "\n";
+      }
+   }
+  
+   Matrix<T,N,M> operator+(Matrix<T,N,M> mat1){
+       
+       Matrix<T,N,M> res;
+       
+       for (int i = 0; i < N; i++) {
+           for (int j = 0; j < M; j++) {
+               res.arr[i][j] = arr[i][j] + mat1.arr[i][j];
+           }
+       }
+       
+       return res;
+       
+   }
+  
+    
+};
+
+
+template<typename T>
+class Range{
+    
+    T start ;
+    T end;
+    
+    public:
+    
+    Range(T s,T e){
+        
+        start = s;
+        end = e;
+        
+    }
+    
+    T length(){
+        return end - start;
+    }
+    
+    void print(){
+        std::cout << start << "-" <<  end << "\n" ;
+    }
+    
+    bool contains(const T& value){
+        return value <= end && value >= start;
+        
+    }
+    
+};
+
+
+// Template specialization
+
+
+
+// 1
+
+template<typename T>
+void printValue(T value) {
+    std::cout << value  << "\n";
+}
+
+template<>
+void printValue<bool>(bool value) {
+    if(value){
+    std::cout << "true"  <<"\n";
+    return;
+    }
+    std::cout << "false" << "\n";
+}
+
+template<>
+void printValue<char*>(char* value) {
+    std::cout <<"["  << "\""<<  value<< "]" << "\""<< std::endl;
+}
+
+
+// 2
+
+template<typename T>
+bool isEqual(T val1, T val2) {
+    return val1 == val2;
+}
+
+template<>
+bool isEqual<char*>(char* val1, char* val2) {
+    return !strcmp(val1,val2);
+}
+
+
+int main() {
+    /*
+     // Function templates 1
+    printElement(10);
+    printElement(3.14);
+    printElement(std::string("Hello"));
+    
+    */
+    
+    
+    /*
+     // Function templates 2
+    mySwap(2, 4);
+    mySwap("f", "y");
+    
+    */
+    
+    
+    /*
+    
+    // Function templates 3
+    
+    int a[] = {1, 2, 3, 4, 5};
+    double b[] = {1.5, 2.5, 3.5};
+    std::string c[] = {"Hello ", "World"};
+
+    sumArray(a, 5);
+    sumArray(b, 3) ;
+    sumArray(c, 2) ;
+    */
+    
+    /*
+      
+      // Function templates 5
+      
+    int a[] = {1, 2, 3, 4, 5};
+    double b[] = {1.5, 2.5, 3.5};
+    std::string c[] = {"Hello ", "World"};
+
+    linearSearch(a, 5, 5) ;
+    linearSearch(b, 3.0, 3) ;
+    linearSearch(c, std::string("Hello"), 2);
+    
+    
+    */
+    
+    
+    // classes
+    
+    
+    /*
+    class 1
+    
+    pair<int,int>* p = new pair<int,int>(2, 4);
+    p->print();
+    delete p;
+    
+    pair<std::string,std::string>* p1 = new pair<std::string,std::string>("ewygfwye", "efef");
+    p1->print();
+    delete p1;
+    */
+    
+    
+    /*
+    class 2
+    FixedArray<int, 5> a;
+
+    a.set(0, 10);
+    a.set(1, 20);
+
+    std::cout << a.get(0) << std::endl;
+    std::cout << a.size() << std::endl;
+
+    FixedArray<std::string, 3> b;
+
+    b.set(0, "Hello");
+    b.set(1, "World");
+
+    std::cout << b.get(0) << std::endl;
+    std::cout << b.size() << std::endl;
+    
+    */
+    
+    /*
+    
+    class 3
+    
+    
+    Matrix<int, 2, 2> a;
+    Matrix<int, 2, 2> b;
+
+    a.set(0, 0, 1);
+    a.set(0, 1, 2);
+    a.set(1, 0, 3);
+    a.set(1, 1, 4);
+
+    b.set(0, 0, 5);
+    b.set(0, 1, 6);
+    b.set(1, 0, 7);
+    b.set(1, 1, 8);
+
+    Matrix<int, 2, 2> c = a + b;
+
+    c.print();
+    
+    */
+    
+    /*
+    class 4
+    Range<int> r(3, 10);
+
+    r.print();
+    std::cout << r.length() << std::endl;
+    std::cout << r.contains(5) << std::endl;
+    
+    */
+    
+    
+    
+    //Template specialization
+    
+    
+    /*
+    // specialization 1
+    
+    printValue(123);
+    printValue(3.14);
+    printValue("qwertyu");
+    
+    */
+     
+     
+    /*
+    
+    // specialization 2
+    
+    char a[] = "Hello";
+    char b[] = "Hello";
+
+    std::cout << isEqual(a, b);
+    */
+    
+    
+    
+    return 0;
+}
