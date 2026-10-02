@@ -1,0 +1,315 @@
+#include <iostream>
+#include<vector>
+
+
+
+void createAndFillVector(int n){
+    
+    std::vector<int> vec(n);
+    for (int i = 0; i < n; i++) {
+        vec[i] = i+1;
+        
+    
+        
+    }
+    
+    for (int i = 0; i < n; i++) {
+        std::cout<< vec[i] << "\t";
+    }
+    
+    
+    
+    std::cout << "\n" << vec.capacity() << " " << vec.size()<< "\n"; 
+}
+
+
+
+
+void workWithEmptyVector(){
+    std::vector<int> vec;
+    for (int i = 0; i <= 9; i++) {
+        vec.push_back(i+1);
+        std::cout << "\n" << vec.capacity() << " " << vec.size()<< "\n"; 
+    
+        
+    }
+    
+    for (int i = 0; i < 9; i++) {
+        std::cout<< vec[i] << "\t";
+    }
+
+}
+
+
+
+std::vector<int> createVectorFromInput(){
+    
+     std::vector<int> vec;
+     int n;
+     std::cin>>n;
+     while(n != 0){
+         vec.push_back(n);
+         std::cin >> n;
+     }
+     
+     
+    
+    return vec;
+    
+}
+
+
+int removeElementsGreaterThan(std::vector<int>& vec, int y){
+    int udalyonnie = 0;
+    int size = vec.size();
+    while(y < vec[vec.size()-1]){
+        vec.pop_back();
+        udalyonnie++;
+    }
+    return udalyonnie;
+}
+
+
+void manageCapacity(std::vector<int>& vec){
+    
+    std::cout << "\n" << vec.capacity() << " " << vec.size()<< "\n"; 
+    vec.reserve(vec.size() + 500);
+    for (int i = 0; i < 500; i++) {
+        vec.push_back(i+1);
+        
+        
+    }
+    std::cout << "\n" << vec.capacity() << " " << vec.size()<< "\n"; 
+    
+}
+
+
+template<typename T>
+void resizeVector(std::vector<T>& vec, int new_size, T val) {
+   
+
+    std::cout << "\n";
+
+    vec.resize(new_size, val);
+
+   
+
+    for (const T& x : vec) {
+        std::cout << x << " ";
+    }
+
+    std::cout << "\n";
+}
+
+
+std::vector<int> mergeSortedVectors(std::vector<int>& vec1, std::vector<int>& vec2 ){
+    
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    std::vector<int> vec3(vec1.size() + vec2.size());
+    while(vec1.size() + vec2.size() > i){
+        
+        if (j >= vec1.size()) {
+            vec3[i] = vec2[k];
+            k++;
+        }
+        else if (k >= vec2.size()) {
+            vec3[i] = vec1[j];
+            j++;
+        }
+        else if (vec1[j] > vec2[k]) {
+            vec3[i] = vec2[k];
+            k++;
+        }
+        else {
+            vec3[i] = vec1[j];
+            j++;
+        }
+        
+        
+        
+        i++;
+    }
+    return vec3;
+}
+
+
+int findSubsequence(std::vector<int>& vec1, std::vector<int>& vec2) {
+    for (int i = 0; i <= vec1.size() - vec2.size(); i++) {
+    bool found = true;
+
+    for (int j = 0; j < vec2.size(); j++) {
+        if (vec1[i + j] != vec2[j]) {
+            found = false;
+            break;
+        }
+    }
+
+    if (found) {
+        return i;
+    }
+}
+
+return -1;
+}
+
+
+
+std::vector<std::vector<int>> groupAdjacent(std::vector<int>& vec1){
+    
+    
+    std::vector<std::vector<int>> groups;
+    
+    std::vector<int> group;
+    for (int i = 0; i < vec1.size(); i++) {
+    if(group.empty() || vec1[i] == vec1[i-1]){
+        group.push_back(vec1[i]);
+    }
+    else{
+        
+        groups.push_back(group);
+        group.clear();
+        group.push_back(vec1[i]);
+        
+    }
+    }
+    
+    groups.push_back(group);
+    
+    return groups;
+    
+}
+
+
+bool isEven(int x) {
+    return x % 2 == 0;
+}
+
+template<typename T>
+std::vector<T> filterVector(bool (*pred)(T), const std::vector<T>& vec) {
+    std::vector<T> vec1;
+
+    for (int i = 0; i < vec.size(); i++) {
+        if (pred(vec[i])) {
+            vec1.push_back(vec[i]);
+        }
+    }
+
+    return vec1;
+}
+
+
+
+int main()
+{
+    
+    
+    //  createAndFillVector(8)  // 1
+    
+        ///////////////////////////////////////////////////////////////////////
+    
+    //  creatAndFillVector();  //2
+    
+    
+    
+        ///////////////////////////////////////////////////////////////////////
+        
+        
+        
+    /*
+     //3
+   std::vector<int> vec = createVectorFromInput();
+    for (int i = 0; i < vec.size(); i++) {
+         std::cout << vec[i] << " " ;
+     }
+    
+    std::cout << "\n" <<  vec.size()<< "\n"; 
+    
+    */
+    ///////////////////////////////////////////////////////////////////////
+    
+    /*
+     // 4
+    std::vector<int> vec(10);
+    for (int i = 0; i < 10; i++) {
+        vec[i] = i;
+    }
+    
+    std::cout << removeElementsGreaterThan(vec,5);
+    */
+    
+    
+    //////////////////////////////////////////////////////////////////////
+    
+    /*
+    //5
+    std::vector<int> vec(10);
+    for (int i = 0; i < 10; i++) {
+        vec[i] = i;
+    }
+    
+    manageCapacity(vec);
+    */
+    
+    
+    //////////////////////////////////////////////////////////////////////
+    
+    
+    /*
+    // 6
+    std::vector<int> v = {1, 2, 3};
+    resizeVector(v, 5, 42);
+    
+    */
+    
+    
+    //////////////////////////////////////////////////////////////////////
+    
+    /*
+    //7
+    std::vector<int> vec1 = {1, 3, 5, 7};
+    std::vector<int> vec2 = {2, 4, 6, 8, 9};
+    std::vector<int> merged = mergeSortedVectors(vec1, vec2);
+    
+    for (int i = 0; i < vec1.size() + vec2.size(); i++) {
+        std::cout<< merged[i] << "\t";
+    }
+    */
+
+   //////////////////////////////////////////////////////////////////////
+   
+   /*
+// 8
+   std::vector<int> main_vec = {1, 2, 3, 4, 5, 6};
+   std::vector<int> sub_vec = {3, 4, 5};
+   int index = findSubsequence(main_vec, sub_vec);
+*/
+
+
+/*
+// 9
+std::vector<int> vec = {1, 1, 2, 2, 2, 3, 1, 1};
+std::vector<std::vector<int>> groups = groupAdjacent(vec);
+
+
+
+*/
+
+
+/* 
+
+//10
+std::vector<int> vec = {1, 2, 3, 4, 5, 6};
+
+    std::vector<int> filtered = filterVector( isEven, vec);
+
+    for (int x : filtered) {
+        std::cout << x << " ";
+    }
+
+
+    */
+    
+    return 0;
+}
